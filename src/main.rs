@@ -1,177 +1,175 @@
 use rand::Rng;
-use std::cmp::Ordering;
 use std::io;
-
 fn easy() {
-    'outer: loop {
-        println!("Guess the number!");
+    println!("Guess the number!");
 
-        let secret_number = rand::thread_rng().gen_range(1..=100);
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
 
-        println!("The secret number is: {secret_number}");
+    println!("The secret number is: {secret_number}");
 
-        'inner: loop {
-            println!("Please input your guess.");
+    //fn restart(again)
 
-            let mut guess = String::new();
+    fn handle_guess(secret_number: u32) {
+        println!("Please input your guess.");
 
-            io::stdin()
-                .read_line(&mut guess)
-                .expect("Failed to read line");
+        let mut guess = String::new();
 
-            let guess: u32 = match guess.trim().parse() {
-                Ok(num) => num,
-                Err(_) => continue 'inner,
-            };
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
-            println!("You guessed: {guess}");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input");
+                return handle_guess(secret_number);
+            }
+        };
 
-            match guess.cmp(&secret_number) {
-                Ordering::Less => println!("Too small!"),
-                Ordering::Greater => println!("Too big!"),
-                Ordering::Equal => {
-                    println!("You win!");
-
-                    println!("Wanna try again? Y/N");
-
-                    'inner_inner: loop {
-                        let mut again: String = String::new();
-
-                        io::stdin()
-                            .read_line(&mut again)
-                            .expect("Failed to read line");
-
-                        let again = again.trim();
-
-                        if again == "Y" {
-                            println!("Restarting...");
-                            continue 'outer;
-                        } else if again == "N" {
-                            println!("Game over");
-                            break 'outer;
-                        } else {
-                            println!("I accept only Y or N values");
-                            continue 'inner_inner;
-                        }
-                    }
+        if guess < secret_number {
+            println!("Nigger");
+            handle_guess(secret_number);
+        } else if guess > secret_number {
+            println!("Smaller");
+            handle_guess(secret_number);
+        } else if guess == secret_number {                  //guessed!
+            println!("You won!");
+            println!("Wanna play again? Y/N");
+            fn restart() {
+                let mut again = String::new();
+                io::stdin()
+                    .read_line(&mut again)
+                    .expect("Failed to read line");
+                let again = again.trim();
+                if again == "Y" {
+                    easy()
+                } else if again == "N" {
+                    println!("Well played");
+                } else {
+                    println!("Invalid input (Y/N)");
+                    restart();
                 }
             }
+            restart() // Function won't start by itself
+        } else {
+            println!("Sorry, looks like something went wrong, crashing the program...");
         }
     }
+    handle_guess(secret_number); // Function won't start by itself
 }
 fn medium() {
-    'outer: loop {
-        println!("Guess the number!");
+    println!("Guess the number!");
 
-        let secret_number = rand::thread_rng().gen_range(1..=1000);
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=1000);
 
-        println!("The secret number is: {secret_number}");
+    println!("The secret number is: {secret_number}");
 
-        'inner: loop {
-            println!("Please input your guess.");
+    //fn restart(again)
 
-            let mut guess = String::new();
+    fn handle_guess(secret_number: u32) {
+        println!("Please input your guess.");
 
-            io::stdin()
-                .read_line(&mut guess)
-                .expect("Failed to read line");
+        let mut guess = String::new();
 
-            let guess: u32 = match guess.trim().parse() {
-                Ok(num) => num,
-                Err(_) => continue 'inner,
-            };
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
-            println!("You guessed: {guess}");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input");
+                return handle_guess(secret_number);
+            }
+        };
 
-            match guess.cmp(&secret_number) {
-                Ordering::Less => println!("Too small!"),
-                Ordering::Greater => println!("Too big!"),
-                Ordering::Equal => {
-                    println!("You win!");
-
-                    println!("Wanna try again? Y/N");
-
-                    'inner_inner: loop {
-                        let mut again: String = String::new();
-
-                        io::stdin()
-                            .read_line(&mut again)
-                            .expect("Failed to read line");
-
-                        let again = again.trim();
-
-                        if again == "Y" {
-                            println!("Restarting...");
-                            continue 'outer;
-                        } else if again == "N" {
-                            println!("Game over");
-                            break 'outer;
-                        } else {
-                            println!("I accept only Y or N values");
-                            continue 'inner_inner;
-                        }
-                    }
+        if guess < secret_number {
+            println!("Nigger");
+            handle_guess(secret_number);
+        } else if guess > secret_number {
+            println!("Smaller");
+            handle_guess(secret_number);
+        } else if guess == secret_number {                  //guessed!
+            println!("You won!");
+            println!("Wanna play again? Y/N");
+            fn restart() {
+                let mut again = String::new();
+                io::stdin()
+                    .read_line(&mut again)
+                    .expect("Failed to read line");
+                let again = again.trim();
+                if again == "Y" {
+                    easy()
+                } else if again == "N" {
+                    println!("Well played");
+                } else {
+                    println!("Invalid input (Y/N)");
+                    restart();
                 }
             }
+            restart() // Function won't start by itself
+        } else {
+            println!("Sorry, looks like something went wrong, crashing the program...");
         }
     }
+    handle_guess(secret_number); // Function won't start by itself
 }
 fn hard() {
-    'outer: loop {
-        println!("Guess the number!");
+    println!("Guess the number!");
 
-        let secret_number = rand::thread_rng().gen_range(1..=6969);
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=6969);
 
-        println!("The secret number is: {secret_number}");
+    println!("The secret number is: {secret_number}");
 
-        'inner: loop {
-            println!("Please input your guess.");
+    //fn restart(again)
 
-            let mut guess = String::new();
+    fn handle_guess(secret_number: u32) {
+        println!("Please input your guess.");
 
-            io::stdin()
-                .read_line(&mut guess)
-                .expect("Failed to read line");
+        let mut guess = String::new();
 
-            let guess: u32 = match guess.trim().parse() {
-                Ok(num) => num,
-                Err(_) => continue 'inner,
-            };
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
-            println!("You guessed: {guess}");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input");
+                return handle_guess(secret_number);
+            }
+        };
 
-            match guess.cmp(&secret_number) {
-                Ordering::Less => println!("Too small!"),
-                Ordering::Greater => println!("Too big!"),
-                Ordering::Equal => {
-                    println!("You win!");
-
-                    println!("Wanna try again? Y/N");
-
-                    'inner_inner: loop {
-                        let mut again: String = String::new();
-
-                        io::stdin()
-                            .read_line(&mut again)
-                            .expect("Failed to read line");
-
-                        let again = again.trim();
-
-                        if again == "Y" {
-                            println!("Restarting...");
-                            continue 'outer;
-                        } else if again == "N" {
-                            println!("Game over");
-                            break 'outer;
-                        } else {
-                            println!("I accept only Y or N values");
-                            continue 'inner_inner;
-                        }
-                    }
+        if guess < secret_number {
+            println!("Nigger");
+            handle_guess(secret_number);
+        } else if guess > secret_number {
+            println!("Smaller");
+            handle_guess(secret_number);
+        } else if guess == secret_number {                  //guessed!
+            println!("You won!");
+            println!("Wanna play again? Y/N");
+            fn restart() {
+                let mut again = String::new();
+                io::stdin()
+                    .read_line(&mut again)
+                    .expect("Failed to read line");
+                let again = again.trim();
+                if again == "Y" {
+                    easy()
+                } else if again == "N" {
+                    println!("Well played");
+                } else {
+                    println!("Invalid input (Y/N)");
+                    restart();
                 }
             }
+            restart() // Function won't start by itself
+        } else {
+            println!("Sorry, looks like something went wrong, crashing the program...");
         }
     }
+    handle_guess(secret_number); // Function won't start by itself
 }
 fn main() {
     println!("Select your difficulty: easy/medium/hard");
@@ -181,6 +179,7 @@ fn main() {
     io::stdin()
         .read_line(&mut difficulty)
         .expect("Failed to read line");
+
     let difficulty = difficulty.trim();
 
     if difficulty == "easy" {
